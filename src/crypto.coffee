@@ -2,13 +2,13 @@
 #   Find the latest cryptocurrency's price in specified currency
 #
 # Commands:
-#   (bch|btc|eth|ltc|xrp|zec) <target currency as 3 letters>
+#   (bch|btc|eth|ltc|xrp|zec) <target currency as 3 letters, defaults to USD>
 #
 # Author:
 #   Jon Coe
 
 GLOBAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/global/ticker/"
-LOCAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/local/ticker/"
+LOCAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/local/ticker/"  # TODO: try these two if not found at GLOBAL
 CRYPTO_INDEX = "https://apiv2.bitcoinaverage.com/indices/crypto/ticker/"
 
 
