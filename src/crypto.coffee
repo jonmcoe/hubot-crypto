@@ -8,6 +8,9 @@
 #   Jon Coe
 
 GLOBAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/global/ticker/"
+LOCAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/local/ticker/"
+CRYPTO_INDEX = "https://apiv2.bitcoinaverage.com/indices/crypto/ticker/"
+
 
 module.exports = (robot) ->
   robot.respond /(eth|btc|bch|ltc|xrp|zec) ?(.*)/i, (msg) ->
@@ -23,16 +26,15 @@ reportPrice = (msg, sourceCurrency, targetCurrency) ->
       msg.send "#{getPrice(body, sourceCurrency, targetCurrency)}"
 
 getPrice = (body, sourceCurrency, targetCurrency) ->
-  json = JSON.parse(body)
+  try
+    json = JSON.parse(body)
+  catch error
+    return "Could not find #{sourceCurrency} in terms of #{targetCurrency}"
   tf_avg = json.averages.day
   ask = json.ask
   bid = json.bid
   last = json.last
   total_vol = json.volume
-  false
 
-  if tf_avg == null
-    "Can't find the price for #{currency}. :("
-  else
-    "#{sourceCurrency} in #{targetCurrency}: #{last} (Ask: #{ask} | Bid: #{bid} | 24h: #{tf_avg} | Vol: #{total_vol})"
+  "#{sourceCurrency} in #{targetCurrency}: #{last} (Ask: #{ask} | Bid: #{bid} | 24h: #{tf_avg} | Vol: #{total_vol})"
 
