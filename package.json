@@ -1,0 +1,24 @@
+{
+  "name": "hubot-crypto",
+  "description": "A Hubot script to report values of cryptocurrencies, tokens, coins.",
+  "version": "0.1.0",
+  "main": "./src/crypto",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonmcoe/hubot-crypto.git"
+  },
+  "keywords": [
+    "hubot",
+    "bitcoin",
+    "crypto",
+    "ethereum",
+    "token",
+    "altcoin"
+  ],
+  "author": "Jon Coe <jonmcoe@gmail.com> (http://github.com/jonmcoe/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonmcoe/hubot-crypto/issues"
+  },
+  "homepage": "https://github.com/jonmcoe/hubot-crypto"
+}
