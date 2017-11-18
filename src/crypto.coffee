@@ -1,8 +1,12 @@
 # Description:
 #   Find the latest cryptocurrency's price in specified currency
 #
+# Configuration:
+#   HUBOT_CRYPTO_SYNONYMS: a json object for setting synonyms for different currencies
+#   HUBOT_DEFAULT_FIAT: in absence of a stated target currency, use this. if not set we use USD
+#
 # Commands:
-#   (bch|btc|eth|ltc|xrp|zec) <target currency as 3 letters, defaults to USD>  # TODO get on help list
+#   hubot (bch|btc|eth|ltc|xrp|zec) <target currency, or default> - Display price of source crypto in terms of target currency  
 #
 # Author:
 #   Jon Coe
@@ -11,7 +15,7 @@ GLOBAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/global/ticker/"
 LOCAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/local/ticker/"  # TODO: try these two if not found at GLOBAL
 CRYPTO_INDEX = "https://apiv2.bitcoinaverage.com/indices/crypto/ticker/"
 
-# json object. use all caps for both keys and values. 
+# json object. should use all caps for both keys and values, but usages in chat remain case-insensitive
 # ex: HUBOT_CRYPTO_SYNONYMS='{"HONEYBADGER": 'BTC'} bc it doesn't give a shit
 SYNONYMS_DICT = JSON.parse(process.env.HUBOT_CRYPTO_SYNONYMS or 'null') or {} 
 
