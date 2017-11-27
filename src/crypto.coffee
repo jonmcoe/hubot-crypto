@@ -39,7 +39,6 @@ module.exports = (robot) ->
 
   # lesser currencies require typing "crypto" first. for these, BTC is the default target currency
   robot.respond /crypto ([a-z0-9]+) ?(.*)/i, (msg) ->
-    console.log msg.match
     sourceCurrency = msg.match[1].trim().toUpperCase()
     targetCurrency = msg.match[2].trim().toUpperCase() || 'BTC'
     reportPrice(msg, sourceCurrency, targetCurrency)
