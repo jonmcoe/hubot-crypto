@@ -2,19 +2,20 @@
 
 ### Usage
 ```
-hubot <cryptocurrency>			returns price of cryptocurrency in USD (or configured default fiat)
-hubot <cryptocurrency> <base>	returns price of cryptocurrency in base currency
+hubot <cryptocurrency>          returns price of cryptocurrency in USD (or configured default fiat)
+hubot <cryptocurrency> <base>   returns price of cryptocurrency in base currency
 ```
 
 Choices for `cryptocurrency`: bch, btc, eth, ltc, xrp, zec
-Choices for `base`: btc, nearly any three character code for a fiat (USD, EUR, GBP, JPY, etc)
 
-See https://apiv2.bitcoinaverage.com/constants/symbols
+Choices for `base`: btc, nearly any three character code for a fiat (USD, EUR, GBP, JPY, etc)
 
 ```
 hubot crypto <source_currency> <target_currency>
 ```
+Will attempt to find `source_currency` in terms of `target_currency` and includes a much wider set of choices for `source_currency`
 
+See https://apiv2.bitcoinaverage.com/constants/symbols
 
 ### Examples
 ```
