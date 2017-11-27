@@ -2,15 +2,19 @@
 
 ### Usage
 ```
-hubot <crypto>			returns price of crypto in USD
-hubot <crypto> <base>		returns price of crypto in base currency
+hubot <cryptocurrency>			returns price of cryptocurrency in USD (or configured default fiat)
+hubot <cryptocurrency> <base>	returns price of cryptocurrency in base currency
 ```
 
-Choices for `crypto`: bch, btc, eth, ltc, xrp, zec
-
+Choices for `cryptocurrency`: bch, btc, eth, ltc, xrp, zec
 Choices for `base`: btc, nearly any three character code for a fiat (USD, EUR, GBP, JPY, etc)
 
-See https://apiv2.bitcoinaverage.com/constants/symbols ("global" section)
+See https://apiv2.bitcoinaverage.com/constants/symbols
+
+```
+hubot crypto <source_currency> <target_currency>
+```
+
 
 ### Examples
 ```
@@ -22,6 +26,12 @@ robot> ETH in EUR: 288.08 (Ask: 288.11 | Bid: 287.91 | 24h: 295.22 | Vol: 705055
 
 robot> robot xrp arf
 robot> Could not find XRP in terms of ARF
+
+robot> robot crypto omg
+robot> OMG in BTC: 0.00090207 (Ask: 0.00090211 | Bid: 0.00089637 | 24h: 0.00057462 | Vol: 214519.60318912)
+
+robot> robot crypto dash usd
+robot> DASH in USD: 622.89 (Ask: 622.89 | Bid: 619.1287 | 24h: 1061.8239 | Vol: 1754.80291928)
 ```
 
 ### Installation
