@@ -16,6 +16,8 @@ GLOBAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/global/ticker/"
 LOCAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/local/ticker/"
 CRYPTO_INDEX = "https://apiv2.bitcoinaverage.com/indices/crypto/ticker/"
 
+GDAX_BASE_URL = "https://api.gdax.com/products/"
+
 # json object. should use all caps for both keys and values, but usages in chat remain case-insensitive
 # ex: HUBOT_CRYPTO_SYNONYMS='{"HONEYBADGER": 'BTC'} bc it doesn't give a shit
 SYNONYMS_DICT = JSON.parse(process.env.HUBOT_CRYPTO_SYNONYMS or 'null') or {} 
@@ -42,6 +44,16 @@ module.exports = (robot) ->
     sourceCurrency = msg.match[1].trim().toUpperCase()
     targetCurrency = msg.match[2].trim().toUpperCase() || 'BTC'
     reportPrice(msg, sourceCurrency, targetCurrency)
+
+  # GDAX. A far more limited set of currencies, but in volatile times it varies significantly from
+  # the composite prices at bitcoinaverage.com and often many observers are particularly interested
+  # in the coinbase/gdax prices
+  robot.respond /gdax (BTC|LTC|ETH) ?($|USD|EUR)/i, (msg) ->
+    DEFAULT_GDAX_FIAT = if DEFAULT_FIAT in ['USD', 'EUR'] then DEFAULT_FIAT else 'USD'
+    console.log sourceCurrency
+    console.log targetCurrency
+    reportPriceGDAX(msg, sourceCurrency, targetCurrency)
+
 
 
 reportPrice = (msg, sourceCurrency, targetCurrency) ->
@@ -81,3 +93,12 @@ buildMessageFromResponse = (body, sourceCurrency, targetCurrency) ->
   total_vol = json.volume
 
   "#{sourceCurrency} in #{targetCurrency}: #{last} (Ask: #{ask} | Bid: #{bid} | 24h: #{tf_avg} | Vol: #{total_vol})"
+
+
+reportPriceGDAX = (msg, sourceCurrency, targetCurrency) ->
+  lastPath = sourceCurrency + '-' + targetCurrency + '/ticker'
+  msg
+    .http(GDAX_BASE_URL + lastPath)
+    .get() (err, res, body) ->
+      json = JSON.parse(body)
+      msg.send("#{sourceCurrency} in #{targetCurrency} on GDAX: #{json['price']}")
