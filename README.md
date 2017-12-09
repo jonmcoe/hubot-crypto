@@ -1,6 +1,7 @@
 ## hubot-crypto [![NPM version](https://badge.fury.io/js/hubot-crypto.png)](http://badge.fury.io/js/hubot-crypto)
 
 ### Usage
+
 ```
 hubot <cryptocurrency>          returns price of cryptocurrency in USD (or configured default fiat)
 hubot <cryptocurrency> <base>   returns price of cryptocurrency in base currency
@@ -17,22 +18,32 @@ Will attempt to find `source_currency` in terms of `target_currency` and include
 
 See https://apiv2.bitcoinaverage.com/constants/symbols
 
+
+```
+hubot gdax <source_currency> <target_currency>
+```
+Will fetch prices from GDAX for the limited set of (BTC|ETH|LTC) --> (USD|EUR)
+
+
 ### Examples
 ```
 robot> robot btc
-robot> BTC in USD: 4473.06 (Ask: 4474.86 | Bid: 4467.96 | 24h: 4606.01 | Vol: 89950.25)
+robot> BTC in USD: 14355.5 | 24hr change: -1690.34 (-10.53%) | Vol: 179634.38822293
 
 robot> robot eth eur
-robot> ETH in EUR: 288.08 (Ask: 288.11 | Bid: 287.91 | 24h: 295.22 | Vol: 705055.02074735)
+robot> ETH in EUR: 393.8701 | 24hr change: +10.31 (+2.6883%) | Vol: 1017775.3482468
 
 robot> robot xrp arf
 robot> Could not find XRP in terms of ARF
 
 robot> robot crypto omg
-robot> OMG in BTC: 0.00090207 (Ask: 0.00090211 | Bid: 0.00089637 | 24h: 0.00057462 | Vol: 214519.60318912)
+robot> OMG in BTC: 0.00058677 | 24hr change: +0.00007204 (+13.99513487%) | Vol: 207497.24702385
 
 robot> robot crypto dash usd
-robot> DASH in USD: 622.89 (Ask: 622.89 | Bid: 619.1287 | 24h: 1061.8239 | Vol: 1754.80291928)
+robot> DASH in USD: 700.0112 | 24hr change: +2.4453 (+0.3505%) | Vol: 2493.51427182
+
+robot> robot gdax ltc
+robot> LTC in USD on GDAX: 149.49000000
 ```
 
 ### Installation

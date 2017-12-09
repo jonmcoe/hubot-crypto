@@ -8,6 +8,7 @@
 # Commands:
 #   hubot (bch|btc|eth|ltc|xrp|zec) <target currency, or default> - Display price of source crypto in terms of target currency
 #   hubot crypto <source currency> <target currency, defaults to BTC> - Display price of source crypto in terms of target currency
+#   hubot gdax (btc|eth|ltc) (usd|eur) - Display price of source crypto in terms of target fiat, as reported by GDAX's API
 #
 # Author:
 #   Jon Coe
@@ -96,7 +97,7 @@ buildMessageFromResponse = (body, sourceCurrency, targetCurrency) ->
   dayChangePercent = if dayChangePercent > 0 then '+' + dayChangePercent else dayChangePercent
 
   # TODO: fix the annoying scientification notation happening for small numbers
-  "#{sourceCurrency} in #{targetCurrency}: #{last} | 24hr change: #{dayChangeAbsolute} (#{dayChangePercent}%) | Vol: #{total_vol})"
+  "#{sourceCurrency} in #{targetCurrency}: #{last} | 24hr change: #{dayChangeAbsolute} (#{dayChangePercent}%) | Vol: #{total_vol}"
 
 
 reportPriceGDAX = (msg, sourceCurrency, targetCurrency) ->
