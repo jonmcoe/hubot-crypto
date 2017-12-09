@@ -50,8 +50,8 @@ module.exports = (robot) ->
   # in the coinbase/gdax prices
   robot.respond /gdax (BTC|LTC|ETH) ?($|USD|EUR)/i, (msg) ->
     DEFAULT_GDAX_FIAT = if DEFAULT_FIAT in ['USD', 'EUR'] then DEFAULT_FIAT else 'USD'
-    console.log sourceCurrency
-    console.log targetCurrency
+    sourceCurrency = msg.match[1].trim().toUpperCase()
+    targetCurrency = msg.match[2].trim().toUpperCase() || DEFAULT_GDAX_FIAT
     reportPriceGDAX(msg, sourceCurrency, targetCurrency)
 
 
