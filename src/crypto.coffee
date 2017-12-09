@@ -86,13 +86,17 @@ reportPrice = (msg, sourceCurrency, targetCurrency) ->
 
 buildMessageFromResponse = (body, sourceCurrency, targetCurrency) ->
   json = JSON.parse(body)
-  tf_avg = json.averages.day
-  ask = json.ask
-  bid = json.bid
   last = json.last
   total_vol = json.volume
+  dayChangeAbsolute = json.changes.price.day
+  dayChangePercent = json.changes.percent.day
 
-  "#{sourceCurrency} in #{targetCurrency}: #{last} (Ask: #{ask} | Bid: #{bid} | 24h: #{tf_avg} | Vol: #{total_vol})"
+  # append + to positives
+  dayChangeAbsolute = if dayChangeAbsolute > 0 then '+' + dayChangeAbsolute else dayChangeAbsolute
+  dayChangePercent = if dayChangePercent > 0 then '+' + dayChangePercent else dayChangePercent
+
+  # TODO: fix the annoying scientification notation happening for small numbers
+  "#{sourceCurrency} in #{targetCurrency}: #{last} | 24hr change: #{dayChangeAbsolute} (#{dayChangePercent}%) | Vol: #{total_vol})"
 
 
 reportPriceGDAX = (msg, sourceCurrency, targetCurrency) ->
