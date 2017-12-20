@@ -49,7 +49,7 @@ module.exports = (robot) ->
   # GDAX. A far more limited set of currencies, but in volatile times it varies significantly from
   # the composite prices at bitcoinaverage.com and often many observers are particularly interested
   # in the coinbase/gdax prices
-  robot.respond /gdax (BTC|LTC|ETH) ?($|USD|EUR)/i, (msg) ->
+  robot.respond /gdax (BTC|LTC|ETH|BCH) ?($|USD|EUR)/i, (msg) ->
     DEFAULT_GDAX_FIAT = if DEFAULT_FIAT in ['USD', 'EUR'] then DEFAULT_FIAT else 'USD'
     sourceCurrency = msg.match[1].trim().toUpperCase()
     targetCurrency = msg.match[2].trim().toUpperCase() || DEFAULT_GDAX_FIAT
