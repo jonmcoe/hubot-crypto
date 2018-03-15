@@ -21,7 +21,7 @@ LOCAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/tokens/ticker/"
 GDAX_BASE_URL = "https://api.gdax.com/products/"
 
 # json object. should use all caps for both keys and values, but usages in chat remain case-insensitive
-# ex: HUBOT_CRYPTO_SYNONYMS='{"HONEYBADGER": 'BTC'} bc it doesn't give a shit
+# ex: HUBOT_CRYPTO_SYNONYMS='{"HONEYBADGER": "BTC"}' bc it doesn't give a shit
 SYNONYMS_DICT = JSON.parse(process.env.HUBOT_CRYPTO_SYNONYMS or 'null') or {} 
 
 # three digit code. use all caps. ex: 'GBP'
