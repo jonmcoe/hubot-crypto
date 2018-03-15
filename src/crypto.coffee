@@ -16,6 +16,7 @@
 GLOBAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/global/ticker/"
 LOCAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/local/ticker/"
 CRYPTO_INDEX = "https://apiv2.bitcoinaverage.com/indices/crypto/ticker/"
+LOCAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/tokens/ticker/"
 
 GDAX_BASE_URL = "https://api.gdax.com/products/"
 
@@ -78,11 +79,17 @@ reportPrice = (msg, sourceCurrency, targetCurrency) ->
               msg
                 .http(CRYPTO_INDEX + lastPath)
                 .get() (err, res, body) ->
-                    if (res.statusCode == 200)
-                      msg.send "#{buildMessageFromResponse(body, sourceCurrency, targetCurrency)}"
-                    # failure
-                    else
-                      msg.send "Could not find #{sourceCurrency} in terms of #{targetCurrency}"
+                  if (res.statusCode == 200)
+                    msg.send "#{buildMessageFromResponse(body, sourceCurrency, targetCurrency)}"
+                  # attempt tokens index
+                  else
+                    msg
+                      .http(TOKENS_INDEX + lastPath)
+                      .get() (err, res, body) ->
+                        if (res.statusCode == 200)
+                          msg.send "#{buildMessageFromResponse(body, sourceCurrency, targetCurrency)}"
+                        else
+                          msg.send "Could not find #{sourceCurrency} in terms of #{targetCurrency}"
 
 
 buildMessageFromResponse = (body, sourceCurrency, targetCurrency) ->
