@@ -1,7 +1,7 @@
 {
   "name": "hubot-crypto",
   "description": "A Hubot script to report values of cryptocurrencies, tokens, coins.",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "main": "./src/crypto",
   "repository": {
     "type": "git",
