@@ -7,7 +7,7 @@ hubot <cryptocurrency>          returns price of cryptocurrency in USD (or confi
 hubot <cryptocurrency> <base>   returns price of cryptocurrency in base currency
 ```
 
-Choices for `cryptocurrency`: bch, btc, eth, ltc, xrp, zec
+Choices for `cryptocurrency`: bch, btc, eth, ltc, xrp, zec, xmr
 
 Choices for `base`: btc, nearly any three character code for a fiat (USD, EUR, GBP, JPY, etc)
 
