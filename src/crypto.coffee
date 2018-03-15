@@ -28,7 +28,7 @@ SYNONYMS_DICT = JSON.parse(process.env.HUBOT_CRYPTO_SYNONYMS or 'null') or {}
 DEFAULT_FIAT = process.env.HUBOT_CRYPTO_DEFAULT_FIAT or 'USD'
 
 # don't need to type "crypto" before these. presently the array of all currencies at GLOBAL_INDEX
-SUPPORTED_TOPLEVEL_CRYPTOS = ['btc', 'eth', 'ltc', 'bch', 'xrp', 'zec']
+SUPPORTED_TOPLEVEL_CRYPTOS = ['btc', 'eth', 'ltc', 'bch', 'xrp', 'zec', 'xmr']
 
 module.exports = (robot) ->
   # top level support. no need to type "crypto" first
