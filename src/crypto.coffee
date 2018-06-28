@@ -16,7 +16,7 @@
 GLOBAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/global/ticker/"
 LOCAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/local/ticker/"
 CRYPTO_INDEX = "https://apiv2.bitcoinaverage.com/indices/crypto/ticker/"
-LOCAL_INDEX = "https://apiv2.bitcoinaverage.com/indices/tokens/ticker/"
+TOKENS_INDEX = "https://apiv2.bitcoinaverage.com/indices/tokens/ticker/"
 
 GDAX_BASE_URL = "https://api.gdax.com/products/"
 
