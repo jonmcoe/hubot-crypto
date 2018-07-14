@@ -66,33 +66,33 @@ reportPrice = (msg, sourceCurrency, targetCurrency) ->
     .http(GLOBAL_INDEX + lastPath)
     .get() (err, res, body) ->
       if (res.statusCode == 200)
-        msg.send "#{buildMessageFromResponse(body, sourceCurrency, targetCurrency)}"
+        msg.send "#{buildMessageFromResponse(body, sourceCurrency, targetCurrency, true)}"
       else
         # attempt local index
         msg
           .http(LOCAL_INDEX + lastPath)
           .get() (err, res, body) ->
             if (res.statusCode == 200)
-              msg.send "#{buildMessageFromResponse(body, sourceCurrency, targetCurrency)}"
+              msg.send "#{buildMessageFromResponse(body, sourceCurrency, targetCurrency, true)}"
             # attempt crypto index
             else
               msg
                 .http(CRYPTO_INDEX + lastPath)
                 .get() (err, res, body) ->
                   if (res.statusCode == 200)
-                    msg.send "#{buildMessageFromResponse(body, sourceCurrency, targetCurrency)}"
+                    msg.send "#{buildMessageFromResponse(body, sourceCurrency, targetCurrency, false)}"
                   # attempt tokens index
                   else
                     msg
                       .http(TOKENS_INDEX + lastPath)
                       .get() (err, res, body) ->
                         if (res.statusCode == 200)
-                          msg.send "#{buildMessageFromResponse(body, sourceCurrency, targetCurrency)}"
+                          msg.send "#{buildMessageFromResponse(body, sourceCurrency, targetCurrency, false)}"
                         else
                           msg.send "Could not find #{sourceCurrency} in terms of #{targetCurrency}"
 
 
-buildMessageFromResponse = (body, sourceCurrency, targetCurrency) ->
+buildMessageFromResponse = (body, sourceCurrency, targetCurrency, includeChanges) ->
   json = JSON.parse(body)
   last = json.last
   total_vol = json.volume
@@ -103,8 +103,10 @@ buildMessageFromResponse = (body, sourceCurrency, targetCurrency) ->
   dayChangeAbsolute = if dayChangeAbsolute > 0 then '+' + dayChangeAbsolute else dayChangeAbsolute
   dayChangePercent = if dayChangePercent > 0 then '+' + dayChangePercent else dayChangePercent
 
+  changeString = if includeChanges then "24hr change: #{dayChangeAbsolute} (#{dayChangePercent}%) |" else ""
+
   # TODO: fix the annoying scientification notation happening for small numbers
-  "#{sourceCurrency} in #{targetCurrency}: #{last} | 24hr change: #{dayChangeAbsolute} (#{dayChangePercent}%) | Vol: #{total_vol}"
+  "#{sourceCurrency} in #{targetCurrency}: #{last} | #{changeString} Vol: #{total_vol}"
 
 
 reportPriceGDAX = (msg, sourceCurrency, targetCurrency) ->
